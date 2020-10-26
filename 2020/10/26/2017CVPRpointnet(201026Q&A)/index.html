@@ -6,25 +6,22 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>Welcome to Computer Vision | Hexo</title>
+  <title>Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="基本上从近期就正式开始我在华中科技大学人工智能与自动化学院SMART Lab的研究生涯了，目前的方向是三维点云的语义分割和实例分割，当然现在才是刚刚入门的阶段，戏称自己为博士0年级。这个博客希望能够伴随我的整个读博生涯，记录我的生活以及学习工作上的经验教训，正能量的感悟亦或是负能量的牢骚，当然一切都要遵守相应的保密原则，以维护个人尤其是实验室的利益与成果为前提条件。希望做的就是记录一些未来几年我愿">
+  <meta name="description" content="2017CVPR：pointnet (20.10.26Q&amp;A)今天主要有几个关于网络结构的问题。 Q1:关于Symmetric Function个人理解：点云数据具有无序性的特点，N个点有$N!$种排列方式，但对应的是同一个点云，网络理应输出相同的分类或者分割的标签。这里的Symmetric Function就是为了解决这一问题，即找到一个函数，输入N个点的顺序无论怎么变化，输出的向量是不">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Welcome to Computer Vision">
-<meta property="og:url" content="http://example.com/2020/10/25/Welcome-to-Computer-Vision/index.html">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://example.com/2020/10/26/2017CVPRpointnet(201026Q&A)/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="基本上从近期就正式开始我在华中科技大学人工智能与自动化学院SMART Lab的研究生涯了，目前的方向是三维点云的语义分割和实例分割，当然现在才是刚刚入门的阶段，戏称自己为博士0年级。这个博客希望能够伴随我的整个读博生涯，记录我的生活以及学习工作上的经验教训，正能量的感悟亦或是负能量的牢骚，当然一切都要遵守相应的保密原则，以维护个人尤其是实验室的利益与成果为前提条件。希望做的就是记录一些未来几年我愿">
+<meta property="og:description" content="2017CVPR：pointnet (20.10.26Q&amp;A)今天主要有几个关于网络结构的问题。 Q1:关于Symmetric Function个人理解：点云数据具有无序性的特点，N个点有$N!$种排列方式，但对应的是同一个点云，网络理应输出相同的分类或者分割的标签。这里的Symmetric Function就是为了解决这一问题，即找到一个函数，输入N个点的顺序无论怎么变化，输出的向量是不">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://example.com/img/myphoto.jpeg">
-<meta property="article:published_time" content="2020-10-25T07:25:15.000Z">
-<meta property="article:modified_time" content="2020-10-25T12:03:52.240Z">
+<meta property="og:image" content="f:/Workspaces/hexo/themes/yilia/source/img/pointnet.PNG">
+<meta property="og:image" content="f:/Workspaces/hexo/themes/yilia/source/img/gs.PNG">
+<meta property="article:published_time" content="2020-10-26T06:24:13.922Z">
+<meta property="article:modified_time" content="2020-10-26T07:09:57.219Z">
 <meta property="article:author" content="John Doe">
-<meta property="article:tag" content="AI&amp;CV">
-<meta property="article:tag" content="Personal Log">
-<meta property="article:tag" content="Welcome">
-<meta property="article:tag" content="3D point cloud">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/img/myphoto.jpeg">
+<meta name="twitter:image" content="f:/Workspaces/hexo/themes/yilia/source/img/pointnet.PNG">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -152,29 +149,40 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-Welcome-to-Computer-Vision" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-2017CVPRpointnet(201026Q&amp;A)" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 class="article-title" itemprop="name">
-      Welcome to Computer Vision
-    </h1>
-  
-
-        
-        <a href="/2020/10/25/Welcome-to-Computer-Vision/" class="archive-article-date">
-  	<time datetime="2020-10-25T07:25:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-10-25</time>
-</a>
-        
-      </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>基本上从近期就正式开始我在华中科技大学人工智能与自动化学院SMART Lab的研究生涯了，目前的方向是三维点云的语义分割和实例分割，当然现在才是刚刚入门的阶段，戏称自己为博士0年级。这个博客希望能够伴随我的整个读博生涯，记录我的生活以及学习工作上的经验教训，正能量的感悟亦或是负能量的牢骚，当然一切都要遵守相应的保密原则，以维护个人尤其是实验室的利益与成果为前提条件。<br>希望做的就是记录一些未来几年我愿意写下来的事情，包括生活和学习工作的方方面面，如果有人愿意看我也很荣幸能够分享给大家，我是无名之人来自无名之处，平凡但希望自己努力做出不平凡的事情。</p>
-<a id="more"></a>
-<p><img src="/img/myphoto.jpeg" alt="myphoto.jpg"></p>
+        <h1 id="2017CVPR：pointnet-20-10-26Q-amp-A"><a href="#2017CVPR：pointnet-20-10-26Q-amp-A" class="headerlink" title="2017CVPR：pointnet (20.10.26Q&amp;A)"></a>2017CVPR：pointnet (20.10.26Q&amp;A)</h1><p>今天主要有几个关于网络结构的问题。</p>
+<h2 id="Q1-关于Symmetric-Function"><a href="#Q1-关于Symmetric-Function" class="headerlink" title="Q1:关于Symmetric Function"></a>Q1:关于Symmetric Function</h2><h3 id="个人理解："><a href="#个人理解：" class="headerlink" title="个人理解："></a>个人理解：</h3><p>点云数据具有无序性的特点，N个点有$N!$种排列方式，但对应的是同一个点云，网络理应输出相同的分类或者分割的标签。这里的Symmetric Function就是为了解决这一问题，即找到一个函数，输入N个点的顺序无论怎么变化，输出的向量是不变的。分类以及分割的网络结构如下图所示：</p>
+<p><img src="F:\Workspaces\hexo\themes\yilia\source\img\pointnet.PNG" alt="pointnet"></p>
+<h3 id="问题："><a href="#问题：" class="headerlink" title="问题："></a>问题：</h3><p>这个部分是否在论文所绘制的网络结构中，不是很清楚论文中$f,g,h$的含义。</p>
+<p><img src="F:\Workspaces\hexo\themes\yilia\source\img\gs.PNG" alt="gs"></p>
+<h2 id="Q2：关于网络结构"><a href="#Q2：关于网络结构" class="headerlink" title="Q2：关于网络结构"></a>Q2：关于网络结构</h2><h3 id="个人理解：-1"><a href="#个人理解：-1" class="headerlink" title="个人理解："></a>个人理解：</h3><ol>
+<li><p>输入n个点(x,y,z)即为输入的$n\times 3$的点云数据</p>
+</li>
+<li><p>经过输入变换(T-net)，目的是用一个mini network来估计点云的仿射变换，以实现几何变换的不变性</p>
+</li>
+<li><p>(64,64)mlp提取特征，得到n个点每个点64维的特征向量</p>
+</li>
+<li><p>经过特征变换，同样是利用T-net，得到新的$n\times 64$的特征，这个特征是针对每个点局部的特征。</p>
+</li>
+<li><p>经过(64,128,1024)的mlp以及maxpooling，得到1024维的全局特征。</p>
+</li>
+<li><p>对于分类任务，上述得到的全局特征既可以直接用来训练SVM或者mlp实现分类，输出K各类别的置信度</p>
+</li>
+<li><p>对于分割任务，必须综合考虑其全局特征与局部特征，故将前述的$n\times 3$的局部特征与$n\times 64$的全局特征合并为$n\times 1088$的矩阵，再经过(512,256,128)mlp得到综合了全局特征与局部特征的n个点各自的128维特征，再经过最终的(128,m)mlp输出n个点的m类置信度，输出每个点的类别即完成了分割任务。</p>
+</li>
+</ol>
+<h3 id="问题：-1"><a href="#问题：-1" class="headerlink" title="问题："></a>问题：</h3><ol>
+<li>Tnet是什么？输入变换是为了几何变换的不变性，那特征变换是为什么？</li>
+<li>文章里面说输入变换能够预测点云数据的仿射变换矩阵，那这个变换的基准位置是什么？因为变换不应该是两个位置之间才会有变换，那我输入一个点云数据的时候他得到的变换矩阵的基准是什么？</li>
+<li>为什么要用mlp把$n\times 64$变为$n\times 1024$？</li>
+<li>文中说因为特征变换矩阵相比仿射变换维度更高，不易于优化，所以加入了正则化项：</li>
+</ol>
+<p>$$L_{reg}=||I-AA^T||_F^2$$</p>
+<p>这个正则化项在优化过程中会使得A的逆矩阵趋近A的转置矩阵，即A趋向于是一个正交矩阵，这样做的目的和原理是什么？</p>
 
       
 
@@ -204,29 +212,6 @@
     <div class="article-info article-info-index">
       
       
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">AI&CV</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Personal Log</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Welcome</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">3D point cloud</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
       
 
       
@@ -277,7 +262,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACJUlEQVR42u3aSY7CQBAEQP7/aeY60rBkdpmR6A6fELJxB4dSbbdbfN1fXsk9f+989vn3NxdfGBgYX8tYO+LrZ5N3vf4mPxsGBsY5jGevfHZPDlgL0/nZMDAwMBJGGzrb38TAwMBoGW3ZmRelGBgYGK8ZbYMsTwfzv6xt4WFgYJzDyEPh/3/+yHwDAwPjqxj38srTuDaVvA8uDAyMvRl5gJu30ubp45tnMTAwNmVM2vSfeDYZNjx4IwYGxtaMPMwlyVweppNj5SNPDAyMvRmfGAC0Y4YL3ouBgbE1ow2g+fAg797nATcqcTEwMLZjtAtYk9DZppvFn4uBgXEMY7KEkR83Wf9K7nxQxGJgYGzNqDtzZThufyEP1hgYGOcw2iJzUu62aWUU3DEwMA5gTIaXeUMtD7L5GTAwME5gtD2rfEmiGDrGY4ALdkYwMDC+kJGvSrRHXCtHF0toDAyMAxhrP9euSlwbmjEwMM5hTIrVtT2HteWMYtiAgYGxKSMH5Ona2jpF/tTT3iEGBsYBjPY1LSBv6rUDBgwMjBMY+ThzLVC2JW7bmMPAwNiVcS+vtlhNUro8QL9JCjEwMDZlTI7VjhPa1HBxZwQDA2NTRp7qzdcsJingm2cxMDAOYLRrDUn6eG0RW883MDAwDmbkr08Sykn8HAVcDAyMrRmTsLvWSov+CAwMjAMY+UhysmxxVf8PAwPjNMZa6TgvX9vUcFL6YmBgfC3jB8aKdHK3cWLJAAAAAElFTkSuQmCC" alt="微信分享二维码">
+      <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACKklEQVR42u3aS47CQAxFUfa/6fQCUMJ9No1U9s0o6gbik0HJv9cLX9fbxT/5/q3n++ffb10yZMg4lsEffPcA8vfnF0FgH16lDBkyFjBIEM/3d2DyOsjR/CFmGTJkyADp2vPv1EKUIUOGjP6BmyZ2HCxDhgwZ32qQ8eOYpIY/qsVlyJBxIIM//vf3/zLfkCFDxlGMK7z6rbe03EVRyZAhYzQjbaV1mm7pkCCOR4YMGUMZpJgk6xe1/xIYen0yZMhYw+g07vkyGW+3BUsbMmTIGM2oNf35I2sB8QGADBkyNjB4GZkelJ1XQJ542zWUIUPGAkYaCik1USj9IlaGDBlDGYTUWc7gaV865rz9jAwZMsYx0iOPr2L0S9ZgjUOGDBmjGWk5mgaXThvTAjje5pAhQ8bhjOfErlZ2Bi0zjG/lpzJkyDiQwYeFPETeB+PjAbQzIkOGjKGMb3XaO2kcZ/BRhAwZMiYxaiND8vk0QeSrGMVlCxkyZBzL4CGmA4NaUdoZecqQIWM2o/Zgnsb1Q0SjTRkyZCxg8KWHfrjkwE3LZhkyZGxmpIdvbXhZG7LKkCFjA+MKrw4mXQgL6m8ZMmSMZqQHHG/xp63/tGQtHtkyZMg4lpG2+DuLFPzg5jHIkCFjD4OMM9P6OEW2jn4ZMmTICBezaqkkfwXBF2TIkLGewYPupH2oCShDhowFDFLEpslcOmao/bIMGTI2MGp5VzryTMOtlc0yZMgYx/gDR/FBz/bvr+AAAAAASUVORK5CYII=" alt="微信分享二维码">
     </div>
 </div>
 
@@ -291,15 +276,11 @@
   
 <nav id="article-nav">
   
-    <a href="/2020/10/26/2017CVPRpointnet(201026Q&A)/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          (no title)
-        
-      </div>
-    </a>
   
+    <a href="/2020/10/25/Welcome-to-Computer-Vision/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Welcome to Computer Vision</div>
+      <i class="icon-circle-right"></i>
+    </a>
   
 </nav>
 
