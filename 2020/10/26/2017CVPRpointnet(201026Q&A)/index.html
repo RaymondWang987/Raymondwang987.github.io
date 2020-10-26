@@ -8,17 +8,17 @@
   <link rel="dns-prefetch" href="http://example.com">
   <title>Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="2017CVPR：pointnet (20.10.26Q&amp;A)今天主要有几个关于网络结构的问题。 Q1:关于Symmetric Function个人理解：点云数据具有无序性的特点，N个点有$N!$种排列方式，但对应的是同一个点云，网络理应输出相同的分类或者分割的标签。这里的Symmetric Function就是为了解决这一问题，即找到一个函数，输入N个点的顺序无论怎么变化，输出的向量是不">
+  <meta name="description" content="2017CVPR：pointnet (20.10.26Q&amp;A)今天主要有几个关于网络结构的问题。感谢师兄的解答！ Q1:关于Symmetric Function个人理解：点云数据具有无序性的特点，N个点有$N!$种排列方式，但对应的是同一个点云，网络理应输出相同的分类或者分割的标签。这里的Symmetric Function就是为了解决这一问题，即找到一个函数，输入N个点的顺序无论怎么变化">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Hexo">
 <meta property="og:url" content="http://example.com/2020/10/26/2017CVPRpointnet(201026Q&A)/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="2017CVPR：pointnet (20.10.26Q&amp;A)今天主要有几个关于网络结构的问题。 Q1:关于Symmetric Function个人理解：点云数据具有无序性的特点，N个点有$N!$种排列方式，但对应的是同一个点云，网络理应输出相同的分类或者分割的标签。这里的Symmetric Function就是为了解决这一问题，即找到一个函数，输入N个点的顺序无论怎么变化，输出的向量是不">
+<meta property="og:description" content="2017CVPR：pointnet (20.10.26Q&amp;A)今天主要有几个关于网络结构的问题。感谢师兄的解答！ Q1:关于Symmetric Function个人理解：点云数据具有无序性的特点，N个点有$N!$种排列方式，但对应的是同一个点云，网络理应输出相同的分类或者分割的标签。这里的Symmetric Function就是为了解决这一问题，即找到一个函数，输入N个点的顺序无论怎么变化">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://example.com/img/gs.PNG">
 <meta property="og:image" content="http://example.com/img/pointnet.PNG">
 <meta property="article:published_time" content="2020-10-26T06:24:13.922Z">
-<meta property="article:modified_time" content="2020-10-26T07:52:11.462Z">
+<meta property="article:modified_time" content="2020-10-26T08:24:45.253Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://example.com/img/gs.PNG">
@@ -154,12 +154,13 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="2017CVPR：pointnet-20-10-26Q-amp-A"><a href="#2017CVPR：pointnet-20-10-26Q-amp-A" class="headerlink" title="2017CVPR：pointnet (20.10.26Q&amp;A)"></a>2017CVPR：pointnet (20.10.26Q&amp;A)</h1><p>今天主要有几个关于网络结构的问题。</p>
+        <h1 id="2017CVPR：pointnet-20-10-26Q-amp-A"><a href="#2017CVPR：pointnet-20-10-26Q-amp-A" class="headerlink" title="2017CVPR：pointnet (20.10.26Q&amp;A)"></a>2017CVPR：pointnet (20.10.26Q&amp;A)</h1><p>今天主要有几个关于网络结构的问题。感谢师兄的解答！</p>
 <h2 id="Q1-关于Symmetric-Function"><a href="#Q1-关于Symmetric-Function" class="headerlink" title="Q1:关于Symmetric Function"></a>Q1:关于Symmetric Function</h2><h3 id="个人理解："><a href="#个人理解：" class="headerlink" title="个人理解："></a>个人理解：</h3><p>点云数据具有无序性的特点，N个点有$N!$种排列方式，但对应的是同一个点云，网络理应输出相同的分类或者分割的标签。这里的Symmetric Function就是为了解决这一问题，即找到一个函数，输入N个点的顺序无论怎么变化，输出的向量是不变的。分类以及分割的网络结构如下图所示：</p>
 <a id="more"></a>
 
 <h3 id="问题："><a href="#问题：" class="headerlink" title="问题："></a>问题：</h3><p><img src="/img/gs.PNG" alt="gs.PNG"></p>
 <p>这个部分是否在论文所绘制的网络结构中，不是很清楚论文中$f,g,h$的含义。</p>
+<h3 id="回答："><a href="#回答：" class="headerlink" title="回答："></a>回答：</h3><p>g就是他要估计的那个函数(Symmetric Function)，h是升高维度的，原来的点是三维的即$X_i\in R^3$，需要把这些点云数据升高到K维。整个的实现方法是利用的mlp，对应于网络结构中的各个mlp，实现从3到64再到1024等升高维度的过程。</p>
 <h2 id="Q2：关于网络结构"><a href="#Q2：关于网络结构" class="headerlink" title="Q2：关于网络结构"></a>Q2：关于网络结构</h2><p><img src="/img/pointnet.PNG" alt="pointnet.PNG"></p>
 <h3 id="个人理解：-1"><a href="#个人理解：-1" class="headerlink" title="个人理解："></a>个人理解：</h3><ol>
 <li>输入n个点(x,y,z)即为输入的$n\times 3$的点云数据</li>
@@ -178,6 +179,12 @@
 </ol>
 <p>$$<br>L_{reg}=||I-AA^T||_F^2<br>$$</p>
 <p>这个正则化项在优化过程中会使得A的逆矩阵趋近A的转置矩阵，即A趋向于是一个正交矩阵，这样做的目的和原理是什么？</p>
+<h3 id="回答：-1"><a href="#回答：-1" class="headerlink" title="回答："></a>回答：</h3><ol>
+<li>Input transform和feature transform的目的都是为了达到旋转不变性，只不过前者是为了解决在低维空间(3维)中的不变性，而后者是为了解决在高位空间(64维)中的不变性，但实际上这个可能更多地是一个论文的噱头，实际上对于解决几何变换的不变性作用不是很好，还需要用其他手段来解决。</li>
+<li>mlp就是对称函数里面的h，为了提高维度</li>
+<li>这个正则化项有可能是在实验过程中发现这样的训练效果较好，具体原理上的解释还需要继续讨论思考。</li>
+</ol>
+<h2 id="后期工作内容："><a href="#后期工作内容：" class="headerlink" title="后期工作内容："></a>后期工作内容：</h2><p>继续完成2017年的这篇文章的阅读，并理解甚至复现其代码。</p>
 
       
 
