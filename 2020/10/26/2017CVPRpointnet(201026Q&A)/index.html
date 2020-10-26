@@ -18,7 +18,7 @@
 <meta property="og:image" content="http://example.com/2020/10/26/2017CVPRpointnet(201026Q&A)/%5Cimg%5Cpointnet.PNG">
 <meta property="og:image" content="http://example.com/2020/10/26/2017CVPRpointnet(201026Q&A)/%5Cimg%5Cgs.PNG">
 <meta property="article:published_time" content="2020-10-26T06:24:13.922Z">
-<meta property="article:modified_time" content="2020-10-26T07:13:58.461Z">
+<meta property="article:modified_time" content="2020-10-26T07:16:56.630Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://example.com/2020/10/26/2017CVPRpointnet(201026Q&A)/%5Cimg%5Cpointnet.PNG">
@@ -156,6 +156,8 @@
       
         <h1 id="2017CVPR：pointnet-20-10-26Q-amp-A"><a href="#2017CVPR：pointnet-20-10-26Q-amp-A" class="headerlink" title="2017CVPR：pointnet (20.10.26Q&amp;A)"></a>2017CVPR：pointnet (20.10.26Q&amp;A)</h1><p>今天主要有几个关于网络结构的问题。</p>
 <h2 id="Q1-关于Symmetric-Function"><a href="#Q1-关于Symmetric-Function" class="headerlink" title="Q1:关于Symmetric Function"></a>Q1:关于Symmetric Function</h2><h3 id="个人理解："><a href="#个人理解：" class="headerlink" title="个人理解："></a>个人理解：</h3><p>点云数据具有无序性的特点，N个点有$N!$种排列方式，但对应的是同一个点云，网络理应输出相同的分类或者分割的标签。这里的Symmetric Function就是为了解决这一问题，即找到一个函数，输入N个点的顺序无论怎么变化，输出的向量是不变的。分类以及分割的网络结构如下图所示：</p>
+<a id="more"></a>
+
 <p><img src="%5Cimg%5Cpointnet.PNG" alt="pointnet"></p>
 <h3 id="问题："><a href="#问题：" class="headerlink" title="问题："></a>问题：</h3><p>这个部分是否在论文所绘制的网络结构中，不是很清楚论文中$f,g,h$的含义。</p>
 <p><img src="%5Cimg%5Cgs.PNG" alt="gs"></p>
