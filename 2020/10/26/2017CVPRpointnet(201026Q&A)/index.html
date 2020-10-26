@@ -15,13 +15,13 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="2017CVPR：pointnet (20.10.26Q&amp;A)今天主要有几个关于网络结构的问题。 Q1:关于Symmetric Function个人理解：点云数据具有无序性的特点，N个点有$N!$种排列方式，但对应的是同一个点云，网络理应输出相同的分类或者分割的标签。这里的Symmetric Function就是为了解决这一问题，即找到一个函数，输入N个点的顺序无论怎么变化，输出的向量是不">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://example.com/img/gs.PNG">
-<meta property="og:image" content="http://example.com/img/pointnet.PNG">
+<meta property="og:image" content="http://example.com/img/gs.png">
+<meta property="og:image" content="http://example.com/img/pointnet.png">
 <meta property="article:published_time" content="2020-10-26T06:24:13.922Z">
-<meta property="article:modified_time" content="2020-10-26T07:23:35.781Z">
+<meta property="article:modified_time" content="2020-10-26T07:26:36.638Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/img/gs.PNG">
+<meta name="twitter:image" content="http://example.com/img/gs.png">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -159,8 +159,8 @@
 <a id="more"></a>
 
 <h3 id="问题："><a href="#问题：" class="headerlink" title="问题："></a>问题：</h3><p>这个部分是否在论文所绘制的网络结构中，不是很清楚论文中$f,g,h$的含义。</p>
-<p><img src="/img/gs.PNG" alt="gs.PNG"></p>
-<h2 id="Q2：关于网络结构"><a href="#Q2：关于网络结构" class="headerlink" title="Q2：关于网络结构"></a>Q2：关于网络结构</h2><p><img src="/img/pointnet.PNG" alt="pointnet.PNG"></p>
+<p><img src="/img/gs.png" alt="gs.png"></p>
+<h2 id="Q2：关于网络结构"><a href="#Q2：关于网络结构" class="headerlink" title="Q2：关于网络结构"></a>Q2：关于网络结构</h2><p><img src="/img/pointnet.png" alt="pointnet.png"></p>
 <h3 id="个人理解：-1"><a href="#个人理解：-1" class="headerlink" title="个人理解："></a>个人理解：</h3><ol>
 <li>输入n个点(x,y,z)即为输入的$n\times 3$的点云数据</li>
 <li>经过输入变换(T-net)，目的是用一个mini network来估计点云的仿射变换，以实现几何变换的不变性</li>
